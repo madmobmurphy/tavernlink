@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    image: tavernlink
+    container_name: tavernlink_instance
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./data:/app/data
+      - ./uploads:/app/uploads
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - JWT_SECRET=change_this_to_something_secure_in_prod

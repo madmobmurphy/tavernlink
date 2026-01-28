@@ -1,0 +1,8 @@
+{
+  "name": "TavernLink",
+  "description": "A secure, RPG-themed chat and video application for adventurers, featuring end-to-end encryption and AI Game Master tools.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
