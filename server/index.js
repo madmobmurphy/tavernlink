@@ -25,7 +25,7 @@ const io = new Server(httpServer, {
   maxHttpBufferSize: 1e8 // 100MB socket limit
 });
 
-const PORT = 3003;
+const PORT = Number(process.env.PORT) || 3003;
 const JWT_SECRET = process.env.JWT_SECRET || 'tavernlink-secret-key-change-me';
 
 app.use(cors());
