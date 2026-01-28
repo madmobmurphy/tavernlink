@@ -22,6 +22,13 @@ COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/server ./server
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3 make g++ \
+    && npm rebuild better-sqlite3 --build-from-source \
+    && npm prune --omit=dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN mkdir -p /app/data /app/uploads
 
 EXPOSE 3003
