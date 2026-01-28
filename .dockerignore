@@ -1,9 +1,8 @@
 node_modules
-.git
-.gitignore
 dist
-npm-debug.log
-Dockerfile
-README.md
 data
 uploads
+.git
+.DS_Store
+*.log
+.env
