@@ -300,6 +300,7 @@ const SettingsModal = ({ user, users, isOpen, onClose, onUpdateUser, onUpdateOth
                             <h2 className="text-xl font-bold">Profile</h2>
                             <input value={name} onChange={e => setName(e.target.value)} className="w-full bg-slate-950 border border-slate-700 rounded p-2" placeholder="Display Name" />
                             <input value={avatar} onChange={e => setAvatar(e.target.value)} className="w-full bg-slate-950 border border-slate-700 rounded p-2" placeholder="Avatar URL" />
+                            <button onClick={onLogout} className="px-4 py-2 bg-red-900/50 hover:bg-red-900 text-red-200 border border-red-800 rounded text-sm flex items-center gap-2"><LogOut className="w-4 h-4" /> Log Out</button>
                         </div>
                     )}
                     {tab === 'audio' && (
@@ -459,6 +460,11 @@ function App() {
   const fetchData = async () => {
     try {
       const res = await fetch(`${API_URL}/init`, { headers: { Authorization: `Bearer ${token}` } });
+      if (res.status === 401 || res.status === 403 || res.status === 404) {
+          console.warn("Invalid token or user not found. Logging out.");
+          handleLogout();
+          return;
+      }
       if (res.ok) {
         const data = await res.json();
         setUser({ ...data.user, name: data.user.display_name || data.user.username });
